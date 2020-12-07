@@ -12,7 +12,7 @@ const app = express();
 const user_routes = require('./routes/users')
 
 //settings
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 4000);
 
 //CORS
 app.use(express.json());
