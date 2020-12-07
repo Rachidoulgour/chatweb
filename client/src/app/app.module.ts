@@ -8,6 +8,10 @@ import { LoginComponent } from './components/login/login.component';
 import { MessageComponent } from './components/message/message.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import { UserService } from './services/user.service';
+import { TokenService } from './services/token.service';
+import { UserguardService } from './services/userguard.service';
 
 @NgModule({
   declarations: [
@@ -20,10 +24,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    UserguardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
