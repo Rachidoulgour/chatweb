@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
   login(){
     
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         console.log(res)
         localStorage.setItem('token', res.token);
         localStorage.setItem('user', JSON.stringify(res.user));
-        this.router.navigate(['/perfil'])
+        // this.router.navigate(['/perfil'])
       },
       err=>{
         console.log(err)
@@ -35,5 +35,4 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-
 }
