@@ -1,0 +1,96 @@
+.navigation{
+    display: flex;
+    background-color: rgb(8, 170, 235);
+    justify-content: space-around;
+    width: 100vw;
+    nav{
+        display: flex;
+        flex-direction: row;
+        ul{
+        
+            display: flex;
+            flex-direction: row;
+            
+            li{
+                all: unset;
+                margin: .1rem 1rem;
+                //color: #ffee05;
+                .navigate{
+                    text-decoration: none;
+                    display: flex;
+                    font-size: 1rem;
+                    //color: #ffee05;
+                    color:white;
+                    //font-size: 1.5rem;
+                    padding: .4rem .5rem;
+                    span{
+                        height: 1rem;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    
+                    &:hover {
+                        background-color: rgb(228, 218, 236);
+                        padding: .4rem .5rem;
+                        transition: ease .3s;
+                    }
+                    .navtitle{
+                        margin: 0 0 .4rem .2rem;
+                    }
+                }
+                .navigate.active{
+                    background-color: rgb(228, 218, 236);
+                }
+            }
+        }
+    }
+    p{
+        color: #ffee05;
+        font-size: 2rem;
+        //font-family: 'Dancing Script', cursive;
+        margin: 0;
+        margin-top: .5rem;
+        padding-top: .5rem;
+        display: none;
+    }
+    
+}
+@media screen and(max-width:640px){
+    .navigation{
+        display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+        nav{
+            ul{
+                display: flex;
+                align-items: center;
+                padding-inline-start:0;
+                li{
+                    all: unset;
+                    margin: .1rem .05rem;
+                    a{
+                        text-decoration: none;
+                        color: #ffee05;
+                        font-size: .8rem;
+                        padding: .4rem .2rem;
+                        &:hover {
+                            background-color: rgb(228, 218, 236);
+                            padding: .4rem .2rem;
+                            transition: ease .3s;
+                        }
+                        mat-icon{
+                            margin: 0 .5rem;
+                        }
+                        .navtitle{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+        p{
+            display: none;
+        }   
+    }
+}

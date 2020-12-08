@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ChatComponent } from './components/chat/chat.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { UsersComponent } from './components/users/users.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
 {
   path: 'chat/:user',
   component: ChatComponent
+},
+{
+  path: 'users',
+  component: UsersComponent
 },
 {
   path: '',

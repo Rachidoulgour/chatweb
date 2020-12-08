@@ -1,0 +1,47 @@
+<div class="navigation">
+
+    <nav>
+        <ul>
+            <ng-container *ngIf="!userService.loggedIn(); else loggedIn">
+                
+                <li>
+                    <a class="navigate" [class.active]="isActive" routerLink="/signup">Registrarse</a>
+                </li>
+                <li>
+                    <a class="navigate" [class.active]="isActive" routerLink="/login">
+                       <span class="navtitle">Entrar</span>
+                    </a>
+                </li>
+            </ng-container>
+            <ng-template #loggedIn>
+                <li>
+                    <a class="navigate" [class.active]="isActive" routerLink="/users">
+                         <span class="navtitle">Usuarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="navigate" [class.active]="isActive" routerLink="/publicar">
+                        
+                             <span class="navtitle">Publicar</span>
+                    </a>
+                </li>
+                <!-- <li> -->
+                    <!-- <a class="navigate" [class.active]="isActive" routerLink="/perfil">
+                         <span class="navtitle">Perfil</span>
+                    </a> -->
+                <!-- </li> -->
+                <!-- <li>
+                    <a class="navigate" [class.active]="isActive" routerLink="/mensajes">
+                         <span class="navtitle">Mensajes </span>
+                    </a>
+                </li> -->
+                <li>
+                    <a class="navigate" [class.active]="isActive" routerLink="/login" (click)="userService.logOut()">
+                         <span class="navtitle">Salir</span>
+                    </a>
+                </li>
+            </ng-template>
+        </ul>
+    </nav>
+    <p>CoEnzym</p>
+</div>

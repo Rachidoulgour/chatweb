@@ -12,6 +12,8 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { UserService } from './services/user.service';
 import { TokenService } from './services/token.service';
 import { UserguardService } from './services/userguard.service';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { UserguardService } from './services/userguard.service';
     SignupComponent,
     LoginComponent,
     MessageComponent,
-    ChatComponent
+    ChatComponent,
+    NavigationComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
