@@ -1,1 +1,18 @@
-<p>users works!</p>
+<h3>Lista de usuarios</h3>
+<div *ngFor="let user of users" class="itemuser">
+    <div class="user-data">
+        <div class="profile-avatar">
+            <img [src]="'http://localhost:3000/'+user.avatar" *ngIf="user.avatar">
+            <img [src]="'assets/no-image.png'" *ngIf="!user.avatar">
+        </div>
+        <div class="datauser">
+            <div class="username">
+                {{user.username}}
+            </div>
+
+            <div>
+                {{user.email}}
+            </div>
+        </div>
+    </div>
+</div>
