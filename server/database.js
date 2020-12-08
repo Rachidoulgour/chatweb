@@ -1,7 +1,7 @@
 const mongoose =require('mongoose');
 require('dotenv').config()
 async function startConnection(){
-    await mongoose.connect('mongodb://localhost/testuiriid', {
+    await mongoose.connect('mongodb://localhost/database', {
         useNewUrlParser: true,
         useFindAndModify: false,
         useUnifiedTopology: true,

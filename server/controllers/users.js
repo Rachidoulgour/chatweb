@@ -1,12 +1,11 @@
 const User = require('../models/user');
-const Follow = require('../models/follow');
-const Publication = require('../models/publication')
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const mongoosePaginate = require('mongoose-pagination');
 const fs = require('fs');
 const path = require('path')
-const transporter = require('../config/nodemailer')
+
 require('dotenv').config();
 
 function saveUser(req, res) {
@@ -49,20 +48,20 @@ function saveUser(req, res) {
                             const token = jwt.sign({
                                 _id: userSaved._id
                             }, process.env.TOKEN_SECRET || "Tokenimage");
-                            const url = `http://localhost:3000/api/activation/${token}`
-                            transporter.sendMail({
-                                from: "bootcampstream@gmail.com",
-                                to: user.email,
-                                subject: "Active su cuenta en nuestra web de intercambio de libros",
-                                html: `
-                              <h1>Bienvenido a nuestra página de viajes</h1>
-                              <p>Porfavor, active su cuenta clicando el siguiente link:
-                                <a href="${url}">
-                                  click aquí para activar tu cuenta
-                                </a>
-                              </p>
-                              `
-                            });
+                            // const url = `http://localhost:3000/api/activation/${token}`
+                            // transporter.sendMail({
+                            //     from: "bootcampstream@gmail.com",
+                            //     to: user.email,
+                            //     subject: "Active su cuenta en nuestra web de intercambio de libros",
+                            //     html: `
+                            //   <h1>Bienvenido a nuestra página de viajes</h1>
+                            //   <p>Porfavor, active su cuenta clicando el siguiente link:
+                            //     <a href="${url}">
+                            //       click aquí para activar tu cuenta
+                            //     </a>
+                            //   </p>
+                            //   `
+                            // });
                             res.json({
                                 token: token,
                                 user: userSaved,
@@ -174,29 +173,11 @@ async function getUser(req, res) {
     user.password = undefined;
     return res.json(user);
 }
-async function followThisUser(identity_user_id, user_id) {
-    const following = await Follow.findOne({
-        "user": identity_user_id,
-        "followed": user_id
-    }).exec((err, follow) => {
-        if (err) return handleError(err);
-        return follow;
-    });
-    const followed = await Follow.findOne({
-        "user": user_id,
-        "followed": identity_user_id
-    }).exec((err, follow) => {
-        if (err) return handleError(err);
-        return follow;
-    })
-    return {
-        following: following,
-        followed: followed
-    }
-}
+
 
 function getUsers(req, res) {
-    let identity_user_id = req.user.sub;
+    console.log(req.user)
+    // let identity_user_id = req.user.sub;
     let page = 1;
     if (req.params.page) {
         page = req.params.page
@@ -219,40 +200,7 @@ function getUsers(req, res) {
 }
 
 
-function getCounters(req, res) {
-    const userId = req.user.sub;
-    if (req.params.id) {
-        userId = req.params.id;
-    }
-    getFollowCount(userId).then((value) => {
-        return res.status(200).send(value);
-    });
-}
-async function getFollowCount(user_id) {
-    const following = await Follow.count({
-        "user": user_id
-    }).exec((err, count) => {
-        if (err) return handleError(err);
-        return count;
-    });
-    const followed = await Follow.count({
-        "followed": user_id
-    }).exec((err, count) => {
-        if (err) return handleError(err);
-        return count;
-    });
-    const publications = await Publication.count({
-        "user": user_id
-    }).exec((err, count) => {
-        if (err) return handleError(err);
-        return count;
-    });
-    return {
-        following: following,
-        followed: followed,
-        publications: publications
-    }
-}
+
 
 function updateUser(req, res) {
     const userId = req.params.id;
@@ -349,21 +297,6 @@ function removeUploadsFiles(res, file_path, message) {
     })
 }
 
-function getAvatarFile(req, res) {
-    const avatar_file = req.params.avatarFile;
-
-    const path_file = '../uploads/publications/' + avatar_file;
-    
-    fs.exists(path_file, (exists) => {
-        if (exists) {
-            res.sendFile(path.resolve(path_file));
-        } else {
-            res.status(200).send({
-                message: 'No existe la imagen del avatar'
-            });
-        }
-    })
-}
 
 module.exports = {
     saveUser,
@@ -371,8 +304,6 @@ module.exports = {
     login,
     getUser,
     getUsers,
-    getCounters,
     updateUser,
     uploadAvatar,
-    getAvatarFile
 }
