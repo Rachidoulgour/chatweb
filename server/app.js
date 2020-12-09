@@ -10,6 +10,7 @@ require('dotenv').config();
 
 const app = express();
 const user_routes = require('./routes/users')
+const message_routes = require('./routes/messages')
 
 //settings
 app.set('port', process.env.PORT || 4000);
@@ -23,7 +24,7 @@ app.use(cors());
 app.use('/api', user_routes);
 // app.use('/api', follow_routes);
 // app.use('/api', publication_routes);
-// app.use('/api', message_routes);
+app.use('/api', message_routes);
 
 // app.get('*', function(req, res, next){
 // 	res.sendFile(path.resolve('index.html'))
