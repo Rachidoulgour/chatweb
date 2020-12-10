@@ -44,9 +44,9 @@
         <div>
             <div>
                 <div class="inputRow">
-                    <form>
+                    <form (ngSubmit)="sendMessage()">
                         <div>
-                            <textarea name="message" id="" cols="30" rows="10"></textarea>
+                            <textarea name="message" [(ngModel)]="message" rows="10"></textarea>
                         </div>
                         <div class="emojiDiv">
                             <button class="emojiBtn">Emoji</button>
